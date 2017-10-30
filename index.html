@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Twitch Project</title>
+    <style>
+        .container-fluid {
+            padding-top: 2rem;
+        }
+
+        .results {
+            padding-right: 3rem;
+        }
+
+        .results:hover {
+            border-right: solid #337ab7 3rem;
+            padding-right: 0rem;
+        }
+
+        img {
+            max-width: 40px;
+            max-height: 40px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app" class="container-fluid">
+        <h1 class="text-center animated" v-html="title"></h1>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div v-for="value in streamers2" class="results panel panel-primary">
+                    <div class="panel-body">
+                        <h2>
+                            <img :src="value.logo" alt="logo">
+                            <a class="lead" :href="value.url" target="_blank">
+                                {{value.displayname}}
+                            </a>
+                        </h2>
+                        <p v-if="value.online">Currently Playing: {{value.game}}</p>
+                        <p v-else>{{value.game}}</p>
+
+                        <p v-if="value.status">Status: {{value.status}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <p class="text-center" v-html="credits"></p>
+    </div>
+    <script>
+        function Stream(name) {
+            this.name = name;
+            this.logo =
+                "http://www.planystech.com/wp-content/uploads/2017/03/profile-placeholder.jpg";
+            this.url;
+            this.status;
+            this.displayname;
+            this.online = "Offline or Inactive";
+            this.game = "Offline";
+            let self = this;
+            $.ajax({
+                type: "GET",
+                url:
+                "https://wind-bow.gomix.me/twitch-api/channels/" +
+                self.name +
+                "?callback=?",
+                dataType: "jsonp",
+                success: function (data) {
+                    if (data.logo !== null) {
+                        self.logo = data.logo;
+                    }
+                    self.url = data.url;
+                    self.status = data.status;
+                    self.displayname = data.display_name;
+                },
+                error: function () {
+                    console.log("Second request fail");
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url:
+                "https://wind-bow.gomix.me/twitch-api/streams/" +
+                self.name +
+                "?callback=?",
+                dataType: "jsonp",
+                success: function (data2) {
+                    if (data2.stream === null) {
+                        self.online = false;
+                        self.game = "Currently Offline";
+                    } else if (data2.stream === undefined) {
+                        self.game = "Account Inactive";
+                        self.online = false;
+                    } else {
+                        self.game = data2.stream.game;
+                        self.online = true;
+                    }
+                },
+                error: function () {
+                    console.log("Second request fail");
+                }
+            });
+        }
+        var app = new Vue({
+            el: "#app",
+            data: {
+                title: '<i class="fa fa-twitch" aria-hidden="true"></i> Twitch Streamers',
+                channels: [
+                    "ESL_SC2",
+                    "OgamingSC2",
+                    "cretetion",
+                    "freecodecamp",
+                    "storbeck",
+                    "habathcx",
+                    "RobotCaleb",
+                    "noobs2ninjas",
+                    "twitchpresents",
+                    "ESL_Hearthstone",
+                    "cohhcarnage",
+                    "amazhs"
+                ],
+                streamers: [],
+                credits:
+                '<p>Created with VueJS by Josh Dean 2017 - Find me on <a target="_blank" href="http://thejoshdean.com">theJoshDean.com</a></p>'
+            },
+            created: function () {
+                this.prepareData();
+            },
+            computed: {
+                streamers2: function () {
+                    let tempStreamers =  this.streamers.filter(function(stream){
+                        // debugger;
+                        return stream.online === true;
+                    });
+
+                    return tempStreamers;
+                }
+
+            },
+            methods: {
+                prepareData: function () {
+                    let self = this;
+                    this.channels.forEach(function (streamer) {
+                        self.streamers.push(new Stream(streamer));
+                    });
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

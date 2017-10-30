@@ -1,0 +1,17 @@
+{
+  "name": "fcc",
+  "version": "1.0.0",
+  "description": "this is a description",
+  "main": "diff.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "another",
+    "keyword"
+  ],
+  "author": "Josh Dean",
+  "license": "ISC"
+}
