@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        function convertToRoman(num) {
+            let romanNum = '';
+            let ones = num % 10;
+            let tens = Math.trunc(num % 100 / 10);
+
+            let hund = Math.trunc(num % 1000 / 100);
+            let thou = Math.trunc(num / 1000);
+            romanNum = '' + getthousand(thou) + gethundred(hund) + getten(tens) + getone(ones);
+            debugger;
+
+            return romanNum;
+        }
+
+        convertToRoman(501);
+
+        function getthousand(x) {
+            let numerals = ['', 'M', 'MM', 'MMM'];
+            return numerals[x];
+        }
+
+        function gethundred(x) {
+            let numerals = ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'];
+            return numerals[x];
+        }
+
+        function getten(x) {
+            let numerals = ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'];
+            return numerals[x];
+        }
+
+        function getone(x) {
+            let numerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+            return numerals[x];
+        }
+
+    </script>
+
+</body>
+
+</html>

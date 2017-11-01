@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        function translatePigLatin(str) {
+            let updatedstr;
+            let vow = findfirstvowel(str);
+
+            if (findfirstvowel(str) == 0) {
+                updatedstr = str + 'way';
+            } else {
+                updatedstr = str.substr(findfirstvowel(str)) + str.substr(0, findfirstvowel(str)) + 'ay';
+            }
+            return updatedstr;
+        }
+
+        function findfirstvowel(str) {
+            let vowellocation = 0;
+
+            vowellocation = str.toLowerCase().search(/[a,e,i,o,u]/);
+
+            return vowellocation;
+        }
+
+        // translatePigLatin("consonant"); //onsonant
+
+        translatePigLatin("algorithm");
+
+
+    </script>
+</body>
+
+</html>

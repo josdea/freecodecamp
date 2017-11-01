@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function whatIsInAName(collection, source) {
+            // What's in a name?
+            var arr = [];
+
+            // Only change code below this line
+
+            var sourcekeys = Object.keys(source);
+            arr = collection.filter(function (obj) {
+                let inthere = true;
+                let i = sourcekeys.length - 1;
+                while ((i >= 0) && (inthere == true)) {
+                    let currentkey = sourcekeys[i];
+                    let hasprop = obj.hasOwnProperty(currentkey);
+                    let hasval = (obj[currentkey] == source[currentkey]);
+                    if (!hasprop || !hasval) {
+                        inthere = false;
+                    }
+                    i--;
+                }
+                return inthere;
+            });
+            // Only change code above this line
+            return arr;
+        }
+
+        whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }],
+            { last: "Capulet" });
+
+
+    </script>
+</body>
+
+</html>
