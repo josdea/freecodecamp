@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+
+function sumPrimes(num) {
+    let prime = true;
+    let retNum = 0;
+    for (var currentPrime = 2; currentPrime <= num; currentPrime++) { //iterate through numbers less that received number
+        for (var index = 2; index < currentPrime && prime == true; index++) { //iterate through possible divsors
+            if (currentPrime % index == 0) { // if divides without remainer than 
+                prime = false;
+            }
+        }
+        if (prime == true) {
+            retNum = retNum + currentPrime;
+        }
+        prime = true;
+    }
+    debugger;
+    return retNum;
+}
+
+        //  sumPrimes(10); //17
+        sumPrimes(977); //73156
+
+    </script> </body>
+
+</html>

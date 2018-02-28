@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+
+        function pairElement(str) {
+            let strArray = str.split("");
+            let arrStr =[];
+            let pair1 = ['G','C','T','A'];
+            let pair2 = ['C','G','A','T'];
+
+            strArray.forEach(function(element, index) {
+                arrStr.push([element, pair2[pair1.indexOf(element)]]);
+                debugger;
+            }, this);
+
+            return arrStr;
+        }
+
+        pairElement("GCG");
+
+
+    </script>
+</body>
+
+</html>

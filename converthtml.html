@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        function convertHTML(str) {
+            let ent = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', '\'': '&apos;' }
+
+            let newStr = str.replace(
+                /[&<>"']/g, function (s) {
+                    return ent[s];
+                }
+            );
+            return newStr;
+        }
+
+        convertHTML("Shindler's List")
+        // convertHTML('Stuff in "quotation marks"')
+        // convertHTML("Dolce & Gabbana");
+        // convertHTML("Hamburgers < Pizza < Tacos")
+
+    </script> </body>
+
+</html>

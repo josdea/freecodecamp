@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function smallestCommons(arr) {
+
+            //my solution works but takes too long
+            // let count = 0;
+            // let first, last;
+            // if (arr[0] < arr[1]) {
+            //     first = arr[0];
+            //     last = arr[1];
+            // } else {
+            //     first = arr[1];
+            //     last = arr[0];
+            // }
+
+            // let retNum = 0;
+            // let product = 1 * last; //5
+            // let dividebyall = false;
+            // let index = 1;
+
+
+            // while (dividebyall != true && product < 6056900) { //iterate through multiples until divides by all
+            //    count++;
+            //     product = index * last; //  23 * 1 = 23
+            //     retNum = product; //5
+            //     console.log("first " + first + " last " + last + " prod " + product);
+
+
+
+            //     for (var n = (last - 1); n >= first; n--) { // iterate through numbers to see if product divdes by all
+
+            //         if (product % n != 0) { //not divisable
+
+            //             dividebyall = false;
+            //             n = (first - 1); //exit inner loop
+
+            //         } else {
+
+            //             dividebyall = true;
+
+            //         }
+
+
+            //     }
+
+            //     index++;
+            // }
+
+            //  debugger;
+            // return retNum;
+
+            var range = [];
+            for (var i = Math.max(arr[0], arr[1]); i >= Math.min(arr[0], arr[1]); i--) {
+                range.push(i);
+            }
+            var lcm = range[0];
+            for (i = 1; i < range.length; i++) {
+                var GCD = gcd(lcm, range[i]);
+                lcm = (lcm * range[i]) / GCD;
+            }
+            return lcm;
+            function gcd(x, y) {
+                if (y === 0)
+                    return x;
+                else
+                    return gcd(y, x % y);
+            }
+        }
+
+
+        smallestCommons([23, 18]); //6056820
+        // smallestCommons([3, 4]);
+
+
+    </script> </body>
+
+</html>

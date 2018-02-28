@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+
+function dropElements(arr, func) {
+    // Drop them elements.
+    let newArr;
+    // let pred = false;
+
+    for (var index = 0; index < arr.length; index++) {
+    //    let x = func(arr[index]);
+        
+        if(func(arr[index]) == true){
+        newArr = arr.slice(index);
+            index = arr.length;
+        }else{
+            newArr = [];
+        }
+        
+    }
+
+
+    return newArr;
+}
+
+        // dropElements([1, 2, 3], function (n) { return n < 3; });
+
+    dropElements([1, 2, 3, 4], function (n) { return n >= 3; });
+
+    </script> </body>
+
+</html>
